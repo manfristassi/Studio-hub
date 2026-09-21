@@ -1,127 +1,4014 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Studio Hub — Il tuo spazio personale</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Studio Hub</title>
+
 <style>
-:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#697386;--accent:#5b5bd6;--accent2:#7c3aed;--line:#e7eaf1;--ok:#0f9d70}
-*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
-.app{display:flex;min-height:100vh}.side{width:245px;background:#11152a;color:#fff;padding:22px 16px;position:fixed;height:100vh}
-.logo{font-size:20px;font-weight:800;padding:8px 10px 25px}.logo span{color:#9b8cff}
-nav button{width:100%;border:0;background:transparent;color:#cbd0e0;text-align:left;padding:12px 13px;border-radius:10px;margin:3px 0;cursor:pointer;font-size:14px}
-nav button.active,nav button:hover{background:#272d4d;color:#fff}.main{margin-left:245px;width:calc(100% - 245px);padding:30px;max-width:1400px}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.title h1{margin:0 0 5px;font-size:30px}.title p{margin:0;color:var(--muted)}
-.btn{border:0;border-radius:10px;padding:10px 14px;background:var(--accent);color:white;cursor:pointer;font-weight:700}.btn.secondary{background:#eef0ff;color:#4848ae}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 4px 18px #17203308}.card h3{margin:0 0 8px}.card p{color:var(--muted);line-height:1.5}.big{font-size:30px;font-weight:800}.tag{display:inline-block;background:#f0efff;color:#4c43bd;padding:5px 9px;border-radius:999px;font-size:12px;margin:4px 4px 0 0}
-.section{display:none}.section.active{display:block}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-input,textarea,select{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;font:inherit;background:white}textarea{min-height:140px;resize:vertical}.row{display:flex;gap:10px}.row>*{flex:1}
-.item{padding:14px;border:1px solid var(--line);border-radius:12px;margin-top:10px}.item strong{display:block;margin-bottom:5px}.muted{color:var(--muted);font-size:13px}.progress{height:8px;background:#eceef5;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:45%}
-table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
-@media(max-width:800px){.side{width:100%;height:auto;position:relative}.app{display:block}.main{margin-left:0;width:100%;padding:18px}.side nav{display:flex;overflow:auto}.side nav button{white-space:nowrap}.grid,.grid2{grid-template-columns:1fr}.logo{padding-bottom:12px}}
+
+:root{
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --text:#182033;
+    --muted:#687083;
+    --primary:#5b5bd6;
+    --primary-dark:#4545a8;
+    --secondary:#eef0ff;
+    --border:#e5e8f0;
+    --success:#0d9b6d;
+    --warning:#f1a51c;
+    --danger:#d94b4b;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.app{
+    min-height:100vh;
+    display:flex;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    width:250px;
+    background:#11152a;
+    color:white;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    padding:20px 14px;
+    overflow-y:auto;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+    padding:8px 10px 25px;
+}
+
+.logo span{
+    color:#9a91ff;
+}
+
+.menu-title{
+    font-size:11px;
+    text-transform:uppercase;
+    color:#777f9e;
+    margin:18px 10px 7px;
+    font-weight:800;
+}
+
+.sidebar button{
+    width:100%;
+    border:none;
+    background:transparent;
+    color:#cbd0e1;
+    text-align:left;
+    padding:12px;
+    border-radius:10px;
+    margin:2px 0;
+    font-size:14px;
+}
+
+.sidebar button:hover,
+.sidebar button.active{
+    background:#282e4f;
+    color:white;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    margin-left:250px;
+    width:calc(100% - 250px);
+    padding:28px;
+    max-width:1600px;
+}
+
+.section{
+    display:none;
+}
+
+.section.active{
+    display:block;
+}
+
+.header{
+    margin-bottom:25px;
+}
+
+.header h1{
+    margin:0 0 7px;
+    font-size:30px;
+}
+
+.header p{
+    margin:0;
+    color:var(--muted);
+}
+
+/* ================= CARDS ================= */
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:20px;
+    margin-bottom:16px;
+    box-shadow:0 5px 20px rgba(20,30,60,.035);
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:16px;
+}
+
+.grid2{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.card h2{
+    margin-top:0;
+}
+
+.card h3{
+    margin-top:0;
+}
+
+.card p{
+    line-height:1.65;
+    color:var(--muted);
+}
+
+.card li{
+    line-height:1.6;
+    margin-bottom:7px;
+}
+
+.tag{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:999px;
+    background:#efefff;
+    color:#4e4eb5;
+    font-size:12px;
+    font-weight:700;
+    margin:3px;
+}
+
+.btn{
+    border:0;
+    background:var(--primary);
+    color:white;
+    padding:11px 15px;
+    border-radius:10px;
+    font-weight:700;
+}
+
+.btn:hover{
+    background:var(--primary-dark);
+}
+
+.btn.secondary{
+    background:var(--secondary);
+    color:#4848aa;
+}
+
+.btn.success{
+    background:var(--success);
+}
+
+.btn.danger{
+    background:#fff0f0;
+    color:var(--danger);
+}
+
+/* ================= FORMS ================= */
+
+label{
+    display:block;
+    font-size:14px;
+    font-weight:700;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    border:1px solid var(--border);
+    background:white;
+    color:var(--text);
+    border-radius:10px;
+    padding:11px;
+    margin-top:6px;
+    outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:var(--primary);
+}
+
+textarea{
+    min-height:130px;
+    resize:vertical;
+}
+
+.row{
+    display:flex;
+    gap:12px;
+}
+
+.row > *{
+    flex:1;
+}
+
+/* ================= INFO ================= */
+
+.warning{
+    background:#fff8e6;
+    border:1px solid #f1dd9b;
+    border-radius:12px;
+    padding:14px;
+    margin-top:12px;
+}
+
+.tip{
+    background:#edf9f4;
+    border:1px solid #c7e8dc;
+    border-radius:12px;
+    padding:14px;
+    margin-top:12px;
+}
+
+.info{
+    background:#f0f1ff;
+    border:1px solid #d8d8ff;
+    border-radius:12px;
+    padding:14px;
+    margin-top:12px;
+}
+
+/* ================= LESSONS ================= */
+
+.lesson{
+    margin-top:16px;
+}
+
+.lesson-section{
+    border-left:4px solid var(--primary);
+    background:#fafaff;
+    padding:15px 17px;
+    border-radius:0 12px 12px 0;
+    margin-top:12px;
+}
+
+.lesson-section h3{
+    margin-top:0;
+    color:#4848aa;
+}
+
+.definition{
+    background:#f7f7ff;
+    border:1px solid #e0e0ff;
+    border-radius:12px;
+    padding:15px;
+    margin:12px 0;
+}
+
+/* ================= TABLE ================= */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:10px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+}
+
+th{
+    background:#f7f8fc;
+}
+
+/* ================= QUIZ ================= */
+
+.quiz-question{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:17px;
+    margin-top:14px;
+}
+
+.quiz-question-title{
+    font-weight:800;
+    line-height:1.5;
+}
+
+.quiz-option{
+    display:block;
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:10px;
+    margin-top:7px;
+    cursor:pointer;
+    font-weight:400;
+}
+
+.quiz-option:hover{
+    background:#f7f7ff;
+}
+
+.quiz-option.correct{
+    background:#e8f8f1;
+    border-color:#7bcaaa;
+}
+
+.quiz-option.wrong{
+    background:#fff0f0;
+    border-color:#e49a9a;
+}
+
+.quiz-result{
+    margin-top:18px;
+    font-size:19px;
+    font-weight:800;
+}
+
+/* ================= STEPS ================= */
+
+.step{
+    display:flex;
+    gap:12px;
+    margin-top:12px;
+    padding:15px;
+    background:#fafaff;
+    border:1px solid var(--border);
+    border-radius:12px;
+}
+
+.step-number{
+    min-width:30px;
+    height:30px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--primary);
+    color:white;
+    font-weight:800;
+}
+
+/* ================= PROGRESS ================= */
+
+.progress{
+    height:9px;
+    background:#e8eaf1;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    background:linear-gradient(90deg,#5b5bd6,#7c3aed);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    .app{
+        display:block;
+    }
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+        padding:12px;
+    }
+
+    .logo{
+        padding:5px 8px 12px;
+    }
+
+    .sidebar nav{
+        display:flex;
+        overflow-x:auto;
+        gap:5px;
+    }
+
+    .sidebar button{
+        width:auto;
+        white-space:nowrap;
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+        padding:17px;
+    }
+
+    .grid2{
+        grid-template-columns:1fr;
+    }
+
+    .row{
+        flex-direction:column;
+    }
+
+    .header h1{
+        font-size:25px;
+    }
+}
+
 </style>
 </head>
+
+
 <body>
+
 <div class="app">
-<aside class="side">
-<div class="logo">Studio <span>Hub</span></div>
+
+<!-- ======================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar">
+
+<div class="logo">
+Studio <span>Hub</span>
+</div>
+
+<div class="menu-title">
+Principale
+</div>
+
 <nav>
-<button class="active" onclick="show('home',this)">🏠 Dashboard</button>
-<button onclick="show('body',this)">🧠 Linguaggio del corpo</button>
-<button onclick="show('finance',this)">📈 Finanza & Borsa</button>
-<button onclick="show('science',this)">🔬 Scienze</button>
-<button onclick="show('ideas',this)">💡 Le mie idee</button>
-<button onclick="show('planner',this)">📊 Project Planner</button>
+
+<button class="active" onclick="showSection('dashboard',this)">
+🏠 Dashboard
+</button>
+
+<button onclick="showSection('body',this)">
+🧠 Linguaggio del corpo
+</button>
+
+<button onclick="showSection('finance',this)">
+📈 Finanza & Borsa
+</button>
+
+<button onclick="showSection('science',this)">
+🔬 Scienze
+</button>
+
+<button onclick="showSection('quiz',this)">
+📝 Quiz
+</button>
+
+<div class="menu-title">
+Organizzazione
+</div>
+
+<button onclick="showSection('ideas',this)">
+💡 Le mie idee
+</button>
+
+<button onclick="showSection('planner',this)">
+📊 Project Planner
+</button>
+
 </nav>
+
 </aside>
+
+
+<!-- ======================================================
+     MAIN
+====================================================== -->
+
 <main class="main">
-<section id="home" class="section active">
-<header><div class="title"><h1>Il tuo spazio personale</h1><p>Studia, organizza idee e costruisci progetti.</p></div></header>
-<div class="grid">
-<div class="card"><span class="tag">Studio</span><h3>Linguaggio del corpo</h3><p>Concetti, esempi e quiz sulla comunicazione non verbale.</p><button class="btn" onclick="go('body')">Apri</button></div>
-<div class="card"><span class="tag">Finanza</span><h3>Finanza & Borsa</h3><p>Impara i fondamentali e costruisci piani in modo ordinato.</p><button class="btn" onclick="go('finance')">Apri</button></div>
-<div class="card"><span class="tag">Scuola</span><h3>Scienze — 4° anno</h3><p>Area modulare per biologia, chimica, fisica e scienze della Terra.</p><button class="btn" onclick="go('science')">Apri</button></div>
+
+
+<!-- ======================================================
+     DASHBOARD
+====================================================== -->
+
+<section id="dashboard" class="section active">
+
+<div class="header">
+
+<h1>Il tuo Studio Hub</h1>
+
+<p>
+Studia, analizza le tue idee e organizza i tuoi progetti.
+</p>
+
 </div>
-<div class="grid2" style="margin-top:16px">
-<div class="card"><h3>💡 Ultime idee</h3><div id="homeIdeas" class="muted">Nessuna idea salvata.</div></div>
-<div class="card"><h3>📊 Progetto finanziario</h3><p>Trasforma un'idea in un progetto con obiettivi, regole, rischi e scenari.</p><button class="btn secondary" onclick="go('planner')">Apri planner</button></div>
+
+
+<div class="grid2">
+
+<div class="card">
+
+<span class="tag">SCIENZE</span>
+
+<h2>🔬 Studia meglio</h2>
+
+<p>
+Inserisci gli argomenti del tuo professore e l'app può trasformarli
+in schede di studio complete.
+</p>
+
+<button class="btn" onclick="goTo('science')">
+Vai a Scienze
+</button>
+
 </div>
+
+
+<div class="card">
+
+<span class="tag">FINANZA</span>
+
+<h2>📈 Impara la finanza</h2>
+
+<p>
+Segui un percorso progressivo per imparare a leggere aziende,
+strumenti finanziari, rischio e scenari.
+</p>
+
+<button class="btn" onclick="goTo('finance')">
+Vai alla finanza
+</button>
+
+</div>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+
+<h3>🧠 Linguaggio del corpo</h3>
+
+<p>
+Postura, gesti, sguardo, espressioni, prossemica e interpretazione
+prudente dei segnali non verbali.
+</p>
+
+<button class="btn secondary" onclick="goTo('body')">
+Apri
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>💡 Idee</h3>
+
+<p>
+Scrivi un'idea e analizzala attraverso problema, soluzione,
+rischi, costi e prossimi esperimenti.
+</p>
+
+<button class="btn secondary" onclick="goTo('ideas')">
+Apri
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>📊 Progetti</h3>
+
+<p>
+Organizza ipotesi, fonti, strategia, rischi e scenari.
+</p>
+
+<button class="btn secondary" onclick="goTo('planner')">
+Apri
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📌 Le tue attività</h2>
+
+<div id="dashboardStats"></div>
+
+</div>
+
 </section>
+
+
+
+<!-- ======================================================
+     BODY LANGUAGE
+====================================================== -->
 
 <section id="body" class="section">
-<header><div class="title"><h1>🧠 Linguaggio del corpo</h1><p>Studia i segnali non verbali senza trattarli come "lettura della mente".</p></div></header>
-<div class="cards">
-<div class="card"><h3>Postura</h3><p>Posizione del corpo, orientamento e cambiamenti possono fornire indizi sullo stato della persona, ma vanno interpretati nel contesto.</p></div>
-<div class="card"><h3>Espressioni</h3><p>Movimenti del viso e variazioni espressive possono accompagnare emozioni e comunicazione.</p></div>
-<div class="card"><h3>Gesti</h3><p>Mani, braccia e movimenti possono enfatizzare, sostituire o accompagnare le parole.</p></div>
-<div class="card"><h3>Spazio personale</h3><p>La distanza comunicativa varia con cultura, relazione, ambiente e situazione.</p></div>
-<div class="card"><h3>Contatto visivo</h3><p>Lo sguardo può avere funzioni sociali diverse; evitare il contatto visivo non ha un significato unico.</p></div>
-<div class="card"><h3>Regola d'oro</h3><p><b>Un singolo segnale non basta.</b> Considera più segnali, il contesto e ciò che la persona dice.</p></div>
+
+<div class="header">
+
+<h1>🧠 Linguaggio del corpo</h1>
+
+<p>
+Impara a osservare la comunicazione non verbale senza cadere
+nelle interpretazioni automatiche.
+</p>
+
 </div>
+
+
+<div class="card">
+
+<h2>Che cos'è?</h2>
+
+<p>
+La comunicazione non verbale comprende postura, gesti,
+espressioni facciali, sguardo, distanza interpersonale,
+orientamento del corpo e aspetti della voce.
+</p>
+
+<div class="warning">
+
+<b>Regola fondamentale:</b>
+
+<p>
+Un singolo comportamento non permette di sapere con certezza
+cosa pensa, prova o vuole una persona.
+</p>
+
+<p>
+Bisogna considerare contesto, comportamento abituale e insieme
+dei segnali osservati.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>1. Postura</h3>
+
+<p>
+La postura comprende posizione della schiena, spalle, testa,
+gambe e orientamento del corpo.
+</p>
+
+<p>
+Una persona può cambiare postura per comodità, stanchezza,
+situazione sociale, emozioni o moltissime altre ragioni.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>2. Gesti</h3>
+
+<p>
+Le mani possono accompagnare il discorso, indicare oggetti,
+rappresentare concetti o sostituire parole.
+</p>
+
+<p>
+Il significato dei gesti può variare molto tra culture e situazioni.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>3. Espressioni facciali</h3>
+
+<p>
+Occhi, sopracciglia, bocca e altri muscoli del volto contribuiscono
+alla comunicazione.
+</p>
+
+<p>
+È importante non attribuire automaticamente una singola emozione
+a una determinata espressione.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>4. Sguardo</h3>
+
+<p>
+Lo sguardo può contribuire all'attenzione, alla gestione dei turni
+di parola e alla relazione sociale.
+</p>
+
+<p>
+Evitare il contatto visivo non significa automaticamente mentire.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>5. Prossemica</h3>
+
+<p>
+La prossemica riguarda l'utilizzo dello spazio e delle distanze
+durante le interazioni.
+</p>
+
+<p>
+La distanza appropriata dipende da relazione, cultura,
+situazione e ambiente.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>6. Voce</h3>
+
+<p>
+Volume, ritmo, pause, velocità e intonazione possono influenzare
+il significato percepito di una frase.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>7. Congruenza</h3>
+
+<p>
+È utile osservare il rapporto tra ciò che una persona dice
+e il comportamento non verbale.
+</p>
+
+<p>
+Una eventuale incongruenza è un elemento da approfondire,
+non una prova automatica di menzogna.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>8. Cluster</h3>
+
+<p>
+Un cluster è un insieme di segnali osservati contemporaneamente
+o in una stessa situazione.
+</p>
+
+<p>
+Osservare più segnali è generalmente più informativo che
+interpretarne uno soltanto.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="card lesson">
+
+<h2>Metodo di osservazione</h2>
+
+<div class="step">
+<div class="step-number">1</div>
+<div>
+<b>Baseline</b>
+<p>
+Osserva come si comporta normalmente la persona.
+</p>
+</div>
+</div>
+
+<div class="step">
+<div class="step-number">2</div>
+<div>
+<b>Cambiamento</b>
+<p>
+Nota quando il comportamento cambia.
+</p>
+</div>
+</div>
+
+<div class="step">
+<div class="step-number">3</div>
+<div>
+<b>Contesto</b>
+<p>
+Chiediti cosa sta succedendo nella situazione.
+</p>
+</div>
+</div>
+
+<div class="step">
+<div class="step-number">4</div>
+<div>
+<b>Cluster</b>
+<p>
+Considera più segnali insieme.
+</p>
+</div>
+</div>
+
+<div class="step">
+<div class="step-number">5</div>
+<div>
+<b>Ipotesi</b>
+<p>
+Formula più di una possibile spiegazione.
+</p>
+</div>
+</div>
+
+</div>
+
 </section>
+
+
+
+<!-- ======================================================
+     FINANCE
+====================================================== -->
 
 <section id="finance" class="section">
-<header><div class="title"><h1>📈 Finanza & Borsa</h1><p>Area didattica per imparare concetti finanziari e organizzare le tue analisi.</p></div></header>
-<div class="cards">
-<div class="card"><h3>Azioni</h3><p>Quote di proprietà di una società. Studia prezzo, capitalizzazione, utili, dividendi e volatilità.</p></div>
-<div class="card"><h3>Obbligazioni</h3><p>Strumenti di debito con caratteristiche di durata, cedola, rendimento e rischio di credito.</p></div>
-<div class="card"><h3>ETF</h3><p>Fondi quotati che possono seguire un indice o una strategia. Valuta costi, indice, replica e rischi.</p></div>
-<div class="card"><h3>Gestione del rischio</h3><p>Diversificazione, dimensionamento della posizione, orizzonte temporale e perdita massima accettabile.</p></div>
+
+<div class="header">
+
+<h1>📈 Finanza & Borsa</h1>
+
+<p>
+Un percorso educativo progressivo per imparare a ragionare sui mercati.
+</p>
+
 </div>
-<div class="card" style="margin-top:16px"><h3>Checklist di analisi</h3>
-<div class="row"><label>Obiettivo<input id="fGoal" placeholder="Es. studiare un ETF"></label><label>Orizzonte<select id="fTime"><option>Breve</option><option>Medio</option><option>Lungo</option></select></label></div>
-<div class="row" style="margin-top:10px"><label>Rischi principali<input id="fRisk" placeholder="Elenca i rischi"></label><label>Fonti da controllare<input id="fSources" placeholder="Bilanci, documenti, dati..."></label></div>
-<button class="btn" style="margin-top:12px" onclick="saveFinance()">Salva checklist</button>
-<div id="financeSaved"></div></div>
+
+
+<div class="card">
+
+<div class="warning">
+
+<b>Nota:</b>
+
+<p>
+Questa sezione ha finalità educative e non costituisce una raccomandazione
+personalizzata di investimento.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>1️⃣ Fondamenta</h3>
+
+<p>
+Capire inflazione, interesse composto, rendimento, rischio,
+liquidità e diversificazione.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>2️⃣ Strumenti</h3>
+
+<p>
+Studiare azioni, obbligazioni, ETF, fondi e altri strumenti.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>3️⃣ Aziende</h3>
+
+<p>
+Imparare a leggere modello di business, ricavi, margini,
+utili, debito e flussi di cassa.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>4️⃣ Valutazione</h3>
+
+<p>
+Studiare metriche come P/E e altri indicatori, comprendendone
+vantaggi e limiti.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>5️⃣ Rischio</h3>
+
+<p>
+Analizzare volatilità, concentrazione, liquidità, debito,
+rischio di mercato e altri fattori.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>6️⃣ Scenari</h3>
+
+<p>
+Costruire ipotesi positiva, centrale e negativa.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="card lesson">
+
+<h2>📚 Percorso passo-passo</h2>
+
+
+<div class="step">
+
+<div class="step-number">1</div>
+
+<div>
+
+<b>Definisci cosa stai studiando</b>
+
+<p>
+Azienda, ETF, obbligazione, settore o altro strumento.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">2</div>
+
+<div>
+
+<b>Capisci come funziona</b>
+
+<p>
+Da dove arrivano i ricavi? Quali sono i costi?
+Qual è il modello di business?
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">3</div>
+
+<div>
+
+<b>Studia i numeri</b>
+
+<p>
+Ricavi, crescita, margini, utile, debito, liquidità e cash flow.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">4</div>
+
+<div>
+
+<b>Studia la valutazione</b>
+
+<p>
+Confronta metriche appropriate con dati storici o società comparabili,
+tenendo conto dei limiti degli indicatori.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">5</div>
+
+<div>
+
+<b>Individua i rischi</b>
+
+<p>
+Scrivi cosa potrebbe andare storto e quali ipotesi devono essere vere.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">6</div>
+
+<div>
+
+<b>Costruisci scenari</b>
+
+<p>
+Scenario positivo, centrale e negativo.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">7</div>
+
+<div>
+
+<b>Controlla le fonti</b>
+
+<p>
+Distingui dati ufficiali, analisi, opinioni e informazioni non verificate.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">8</div>
+
+<div>
+
+<b>Scrivi la tua tesi</b>
+
+<p>
+Riassumi perché l'ipotesi potrebbe funzionare e cosa potrebbe
+dimostrarla sbagliata.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📝 Scheda di analisi</h2>
+
+<div class="row">
+
+<label>
+Cosa sto analizzando?
+<input id="financeGoal">
+</label>
+
+<label>
+Orizzonte
+<select id="financeHorizon">
+<option>Breve termine</option>
+<option>Medio termine</option>
+<option>Lungo termine</option>
+</select>
+</label>
+
+</div>
+
+<div class="row" style="margin-top:12px">
+
+<label>
+Rischi principali
+<input id="financeRisk">
+</label>
+
+<label>
+Fonti da verificare
+<input id="financeSources">
+</label>
+
+</div>
+
+<button class="btn" style="margin-top:12px" onclick="saveFinance()">
+💾 Salva analisi
+</button>
+
+<p id="financeMessage"></p>
+
+</div>
+
 </section>
+
+
+
+<!-- ======================================================
+     SCIENCE
+====================================================== -->
 
 <section id="science" class="section">
-<header><div class="title"><h1>🔬 Scienze — 4° anno</h1><p>Struttura modulare: possiamo adattarla al tuo liceo e al tuo programma reale.</p></div></header>
-<div class="cards">
-<div class="card"><h3>🧬 Biologia</h3><p>Cellula, metabolismo, genetica, DNA/RNA, divisione cellulare, evoluzione e fisiologia.</p><div class="progress"><i style="width:20%"></i></div></div>
-<div class="card"><h3>⚗️ Chimica</h3><p>Struttura atomica, legami, reazioni, equilibrio, acidi e basi, organica.</p><div class="progress"><i style="width:20%"></i></div></div>
-<div class="card"><h3>⚡ Fisica</h3><p>Meccanica, energia, quantità di moto, termodinamica ed eventuali moduli previsti dal tuo indirizzo.</p><div class="progress"><i style="width:20%"></i></div></div>
-<div class="card"><h3>🌍 Scienze della Terra</h3><p>Struttura della Terra, dinamica interna, rocce, tettonica e atmosfera, secondo il programma.</p><div class="progress"><i style="width:20%"></i></div></div>
+
+<div class="header">
+
+<h1>🔬 Scienze</h1>
+
+<p>
+Scrivi gli argomenti svolti dal tuo professore e crea le relative
+schede di studio.
+</p>
+
 </div>
-<div class="card" style="margin-top:16px"><h3>Personalizza il programma</h3><p>Scrivi qui gli argomenti che hai realmente svolto a scuola: li useremo per costruire la versione completa.</p><textarea id="scienceNotes" placeholder="Es. genetica, redox, termodinamica..."></textarea><button class="btn" onclick="saveScience()">Salva argomenti</button><div id="scienceSaved"></div></div>
+
+
+<div class="card">
+
+<h2>📚 Argomenti trattati dal professore</h2>
+
+<p>
+Scrivi uno o più argomenti. Puoi inserirli uno per riga, separati
+da virgole oppure da punto e virgola.
+</p>
+
+<textarea
+id="scienceTopics"
+placeholder="Esempio:
+
+cellula procariote
+cellula eucariote
+mitosi
+meiosi
+DNA e RNA
+genetica
+enzimi"></textarea>
+
+
+<div class="row" style="margin-top:12px">
+
+<button class="btn" onclick="generateScienceLessons()">
+🧠 Genera lezioni
+</button>
+
+<button class="btn secondary" onclick="saveScienceTopics()">
+💾 Salva programma
+</button>
+
+</div>
+
+<p id="scienceMessage"></p>
+
+</div>
+
+
+<div id="scienceLessons"></div>
+
+
+<div class="card">
+
+<h2>🧬 Argomenti fondamentali di biologia</h2>
+
+<div class="cards">
+
+<div>
+<span class="tag">Cellula</span>
+<span class="tag">DNA</span>
+<span class="tag">RNA</span>
+<span class="tag">Genetica</span>
+</div>
+
+<div>
+<span class="tag">Mitosi</span>
+<span class="tag">Meiosi</span>
+<span class="tag">Enzimi</span>
+<span class="tag">Metabolismo</span>
+</div>
+
+</div>
+
+</div>
+
 </section>
+
+
+
+<!-- ======================================================
+     QUIZ
+====================================================== -->
+
+<section id="quiz" class="section">
+
+<div class="header">
+
+<h1>📝 Quiz</h1>
+
+<p>
+60 domande per allenarti.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<label>
+
+Modulo
+
+<select id="quizType" onchange="loadQuiz()">
+
+<option value="body">
+🧠 Linguaggio del corpo — 20 domande
+</option>
+
+<option value="finance">
+📈 Finanza — 20 domande
+</option>
+
+<option value="science">
+🔬 Scienze — 20 domande
+</option>
+
+</select>
+
+</label>
+
+<div id="quizContainer"></div>
+
+<button class="btn" style="margin-top:18px" onclick="correctQuiz()">
+✅ Correggi quiz
+</button>
+
+<div id="quizResult"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- ======================================================
+     IDEAS
+====================================================== -->
 
 <section id="ideas" class="section">
-<header><div class="title"><h1>💡 Le mie idee</h1><p>Scrivi liberamente. L'app salva le idee nel browser.</p></div></header>
-<div class="card"><div class="row"><input id="ideaTitle" placeholder="Titolo dell'idea"><select id="ideaCat"><option>Studio</option><option>Finanza</option><option>Business</option><option>Personale</option><option>Altro</option></select></div>
-<textarea id="ideaText" style="margin-top:10px" placeholder="Descrivi la tua idea..."></textarea><button class="btn" style="margin-top:10px" onclick="addIdea()">+ Salva idea</button></div>
-<div id="ideasList" style="margin-top:16px"></div>
+
+<div class="header">
+
+<h1>💡 Le mie idee</h1>
+
+<p>
+Usa questa sezione per trasformare un'idea vaga in un ragionamento
+strutturato.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>Nuova idea</h2>
+
+<label>
+
+Titolo
+
+<input id="ideaTitle" placeholder="Nome della mia idea">
+
+</label>
+
+
+<label style="margin-top:12px">
+
+Categoria
+
+<select id="ideaCategory">
+
+<option>Studio</option>
+<option>Business</option>
+<option>Finanza</option>
+<option>Progetto</option>
+<option>Personale</option>
+<option>Altro</option>
+
+</select>
+
+</label>
+
+
+<label style="margin-top:12px">
+
+Descrizione
+
+<textarea
+id="ideaDescription"
+placeholder="Descrivi la tua idea..."></textarea>
+
+</label>
+
+
+<button class="btn" style="margin-top:10px" onclick="saveIdea()">
+💾 Salva idea
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>🧠 Metodo per ragionare sull'idea</h2>
+
+
+<div class="step">
+
+<div class="step-number">1</div>
+
+<div>
+
+<b>Problema</b>
+
+<p>
+Quale problema concreto vuoi risolvere?
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">2</div>
+
+<div>
+
+<b>Persona</b>
+
+<p>
+Chi ha realmente questo problema?
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">3</div>
+
+<div>
+
+<b>Soluzione</b>
+
+<p>
+Come vuoi risolverlo?
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">4</div>
+
+<div>
+
+<b>Valore</b>
+
+<p>
+Perché la soluzione potrebbe essere utile?
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">5</div>
+
+<div>
+
+<b>Assunzioni</b>
+
+<p>
+Quali cose stai dando per vere senza averle ancora verificate?
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">6</div>
+
+<div>
+
+<b>Rischi</b>
+
+<p>
+Quali sono i principali modi in cui l'idea potrebbe fallire?
+</p>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">7</div>
+
+<div>
+
+<b>Esperimento</b>
+
+<p>
+Qual è il test più economico che puoi fare per ottenere informazioni?
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div id="ideasList"></div>
+
 </section>
 
+
+
+<!-- ======================================================
+     PROJECT PLANNER
+====================================================== -->
+
 <section id="planner" class="section">
-<header><div class="title"><h1>📊 Project Planner</h1><p>Costruisci un piano finanziario didattico e ordinato. Non è consulenza finanziaria.</p></div></header>
-<div class="card">
-<div class="row"><label>Nome progetto<input id="pName" placeholder="Es. Piano di studio ETF"></label><label>Obiettivo<input id="pGoal" placeholder="Cosa vuoi ottenere/imparare?"></label></div>
-<div class="row" style="margin-top:10px"><label>Capitale ipotetico (€)<input id="pCapital" type="number" placeholder="1000"></label><label>Orizzonte<select id="pHorizon"><option>1-3 anni</option><option>3-5 anni</option><option>5+ anni</option></select></label></div>
-<label style="display:block;margin-top:10px">Strategia / regole<textarea id="pStrategy" placeholder="Quali regole seguirai?"></textarea></label>
-<label style="display:block;margin-top:10px">Rischi e scenario negativo<textarea id="pRisks" placeholder="Cosa potrebbe andare storto?"></textarea></label>
-<label style="display:block;margin-top:10px">Fonti e verifiche<textarea id="pSources" placeholder="Documenti, dati, fonti da controllare..."></textarea></label>
-<button class="btn" style="margin-top:10px" onclick="savePlan()">Salva progetto</button>
+
+<div class="header">
+
+<h1>📊 Project Planner</h1>
+
+<p>
+Organizza un progetto in modo strutturato.
+</p>
+
 </div>
-<div id="plansList" style="margin-top:16px"></div>
+
+
+<div class="card">
+
+<h2>1. Identità del progetto</h2>
+
+<div class="row">
+
+<label>
+
+Nome
+
+<input id="projectName" placeholder="Nome del progetto">
+
+</label>
+
+
+<label>
+
+Obiettivo
+
+<input id="projectGoal" placeholder="Cosa voglio ottenere?">
+
+</label>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>2. Ipotesi</h2>
+
+<textarea
+id="projectHypothesis"
+placeholder="La mia ipotesi è... perché..."></textarea>
+
+</div>
+
+
+<div class="card">
+
+<h2>3. Informazioni da raccogliere</h2>
+
+<textarea
+id="projectSources"
+placeholder="Quali dati, documenti o fonti devo verificare?"></textarea>
+
+</div>
+
+
+<div class="card">
+
+<h2>4. Strategia</h2>
+
+<textarea
+id="projectStrategy"
+placeholder="Quali passaggi seguirò?"></textarea>
+
+</div>
+
+
+<div class="card">
+
+<h2>5. Rischi</h2>
+
+<textarea
+id="projectRisks"
+placeholder="Cosa potrebbe andare storto?"></textarea>
+
+</div>
+
+
+<div class="card">
+
+<h2>6. Scenari</h2>
+
+<div class="row">
+
+<label>
+
+Scenario positivo
+
+<textarea
+id="projectPositive"
+placeholder="Cosa dovrebbe andare molto bene?"></textarea>
+
+</label>
+
+
+<label>
+
+Scenario centrale
+
+<textarea
+id="projectBase"
+placeholder="Qual è lo scenario più normale?"></textarea>
+
+</label>
+
+
+<label>
+
+Scenario negativo
+
+<textarea
+id="projectNegative"
+placeholder="Cosa potrebbe andare male?"></textarea>
+
+</label>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>7. Prossimi passi</h2>
+
+<textarea
+id="projectNext"
+placeholder="Qual è la prossima azione concreta?"></textarea>
+
+<button class="btn" style="margin-top:12px" onclick="saveProject()">
+💾 Salva progetto
+</button>
+
+</div>
+
+
+<div id="projectsList"></div>
+
 </section>
-</main></div>
+
+</main>
+
+</div>
+
+
+
 <script>
-const get=(k,d=[])=>JSON.parse(localStorage.getItem(k)||JSON.stringify(d));
-const set=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
-function show(id,btn){document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');render();}
-function go(id){show(id,[...document.querySelectorAll('nav button')].find(b=>b.getAttribute('onclick')?.includes("'"+id+"'")))}
-function addIdea(){let t=ideaTitle.value.trim(),x=ideaText.value.trim();if(!t||!x)return alert('Inserisci titolo e descrizione.');let a=get('ideas');a.unshift({t,x,c:ideaCat.value,d:new Date().toLocaleString('it-IT')});set('ideas',a);ideaTitle.value='';ideaText.value='';render();}
-function delIdea(i){let a=get('ideas');a.splice(i,1);set('ideas',a);render();}
-function savePlan(){let p={n:pName.value,g:pGoal.value,c:pCapital.value,h:pHorizon.value,s:pStrategy.value,r:pRisks.value,src:pSources.value,d:new Date().toLocaleString('it-IT')};if(!p.n)return alert('Dai un nome al progetto.');let a=get('plans');a.unshift(p);set('plans',a);['pName','pGoal','pCapital','pStrategy','pRisks','pSources'].forEach(id=>document.getElementById(id).value='');render();}
-function delPlan(i){let a=get('plans');a.splice(i,1);set('plans',a);render();}
-function saveScience(){set('scienceNotes',scienceNotes.value);scienceSaved.innerHTML='<p class="muted">Salvato.</p>'}
-function saveFinance(){set('financeChecklist',{g:fGoal.value,t:fTime.value,r:fRisk.value,s:fSources.value});financeSaved.innerHTML='<p class="muted">Checklist salvata.</p>'}
-function render(){let a=get('ideas');ideasList.innerHTML=a.length?a.map((v,i)=>`<div class="card item"><span class="tag">${v.c}</span><strong>${esc(v.t)}</strong><p>${esc(v.x)}</p><span class="muted">${v.d}</span> <button class="btn secondary" onclick="delIdea(${i})">Elimina</button></div>`).join(''):'<div class="card muted">Nessuna idea salvata.</div>';homeIdeas.innerHTML=a.length?`<b>${esc(a[0].t)}</b><br><span class="muted">${esc(a[0].x).slice(0,100)}...</span>`:'Nessuna idea salvata.';
-let p=get('plans');plansList.innerHTML=p.length?p.map((v,i)=>`<div class="card item"><span class="tag">${v.h}</span><strong>${esc(v.n)}</strong><p><b>Obiettivo:</b> ${esc(v.g)}<br><b>Capitale ipotetico:</b> €${esc(v.c||'0')}</p><p>${esc(v.s)}</p><span class="muted">${v.d}</span> <button class="btn secondary" onclick="delPlan(${i})">Elimina</button></div>`).join(''):'<div class="card muted">Nessun progetto salvato.</div>';
-scienceNotes.value=localStorage.getItem('scienceNotes')||'';let fc=get('financeChecklist',{});fGoal.value=fc.g||'';fTime.value=fc.t||'Breve';fRisk.value=fc.r||'';fSources.value=fc.s||'';}
-function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-render();
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+function getData(key, fallback){
+
+    try{
+
+        const value=localStorage.getItem(key);
+
+        return value
+            ? JSON.parse(value)
+            : fallback;
+
+    }catch(error){
+
+        return fallback;
+
+    }
+
+}
+
+
+function setData(key,value){
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(value)
+    );
+
+}
+
+
+/* =========================================================
+   NAVIGAZIONE
+========================================================= */
+
+function showSection(id,button){
+
+    document.querySelectorAll(".section")
+        .forEach(section=>{
+            section.classList.remove("active");
+        });
+
+    const target=document.getElementById(id);
+
+    if(target){
+        target.classList.add("active");
+    }
+
+    document.querySelectorAll(".sidebar button")
+        .forEach(btn=>{
+            btn.classList.remove("active");
+        });
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    renderAll();
+
+    if(id==="quiz"){
+        loadQuiz();
+    }
+
+}
+
+
+function goTo(id){
+
+    const buttons=[
+        ...document.querySelectorAll(".sidebar button")
+    ];
+
+    const button=buttons.find(btn=>{
+        return (btn.getAttribute("onclick")||"")
+            .includes("'" + id + "'");
+    });
+
+    showSection(id,button);
+
+}
+
+
+/* =========================================================
+   SICUREZZA TESTO
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   FINANZA
+========================================================= */
+
+function saveFinance(){
+
+    const data={
+
+        goal:document.getElementById("financeGoal").value,
+
+        horizon:document.getElementById("financeHorizon").value,
+
+        risk:document.getElementById("financeRisk").value,
+
+        sources:document.getElementById("financeSources").value
+
+    };
+
+    setData("financeData",data);
+
+    document.getElementById("financeMessage").innerHTML=
+        "✓ Analisi salvata sul dispositivo.";
+
+}
+
+
+/* =========================================================
+   SCIENZE
+========================================================= */
+
+function saveScienceTopics(){
+
+    const topics=
+        document.getElementById("scienceTopics").value;
+
+    setData("scienceTopics",topics);
+
+    document.getElementById("scienceMessage").innerHTML=
+        "✓ Programma salvato sul dispositivo.";
+
+}
+
+
+/* =========================================================
+   DATABASE LEZIONI SCIENZE
+========================================================= */
+
+const scienceLibrary={
+
+
+"cellula procariote":{
+
+title:"La cellula procariote",
+
+definition:
+"La cellula procariote è una cellula priva di un nucleo delimitato da membrana. Il materiale genetico si trova principalmente nella regione chiamata nucleoide.",
+
+intro:
+"I procarioti comprendono principalmente batteri e archei. Sono cellule generalmente più piccole delle eucariote, ma presentano una notevole diversità metabolica.",
+
+sections:[
+
+{
+title:"1. Struttura generale",
+
+text:
+"La cellula procariote possiede membrana plasmatica, citoplasma, ribosomi e materiale genetico. Molti batteri possiedono inoltre una parete cellulare e alcune specie presentano capsula, flagelli o pili."
+},
+
+{
+title:"2. Membrana plasmatica",
+
+text:
+"La membrana plasmatica è costituita principalmente da un doppio strato di fosfolipidi e proteine. Delimita la cellula e regola numerosi scambi con l'ambiente."
+},
+
+{
+title:"3. Parete cellulare",
+
+text:
+"Nei batteri la parete cellulare contiene tipicamente peptidoglicano. Contribuisce alla forma della cellula e alla protezione. La struttura della parete permette di distinguere batteri Gram-positivi e Gram-negativi."
+},
+
+{
+title:"4. Nucleoide",
+
+text:
+"Il nucleoide è la regione della cellula in cui si trova il principale cromosoma batterico. Non è un vero nucleo perché non è circondato da una membrana nucleare."
+},
+
+{
+title:"5. Plasmidi",
+
+text:
+"I plasmidi sono piccole molecole di DNA separate dal cromosoma principale. Possono contenere geni che conferiscono determinate caratteristiche alla cellula."
+},
+
+{
+title:"6. Ribosomi",
+
+text:
+"I ribosomi sono responsabili della sintesi delle proteine. Leggono l'informazione contenuta nell'RNA messaggero e permettono l'assemblaggio degli amminoacidi."
+},
+
+{
+title:"7. Flagelli",
+
+text:
+"Alcuni batteri possiedono flagelli che permettono il movimento della cellula attraverso determinati ambienti."
+},
+
+{
+title:"8. Pili e fimbrie",
+
+text:
+"Fimbrie e pili sono strutture filamentose superficiali. Le fimbrie possono favorire l'adesione. Alcuni pili partecipano al trasferimento di materiale genetico."
+},
+
+{
+title:"9. Capsula",
+
+text:
+"Alcuni batteri possiedono una capsula esterna che può contribuire alla protezione e all'adesione."
+},
+
+{
+title:"10. Riproduzione",
+
+text:
+"La riproduzione batterica avviene frequentemente mediante scissione binaria. Il materiale genetico viene replicato e la cellula si divide."
+},
+
+{
+title:"11. Trasferimento genico",
+
+text:
+"I batteri possono scambiarsi materiale genetico mediante trasformazione, trasduzione e coniugazione. Questi processi contribuiscono alla variabilità genetica."
+},
+
+{
+title:"12. Gram-positivi e Gram-negativi",
+
+text:
+"I Gram-positivi possiedono generalmente uno spesso strato di peptidoglicano. I Gram-negativi hanno uno strato più sottile e una membrana esterna aggiuntiva."
+},
+
+{
+title:"13. Procarioti ed eucarioti",
+
+text:
+"La differenza fondamentale è la presenza del nucleo delimitato da membrana nelle cellule eucariote. Le cellule eucariote possiedono inoltre numerosi organelli membranosi."
+}
+
+],
+
+keywords:[
+"procariote",
+"batteri",
+"archei",
+"nucleoide",
+"plasmidi",
+"ribosomi",
+"membrana",
+"parete",
+"flagelli",
+"pili",
+"capsula",
+"Gram+",
+"Gram-",
+"scissione binaria",
+"coniugazione",
+"trasformazione",
+"trasduzione"
+],
+
+questions:[
+"Che cos'è una cellula procariote?",
+"Dove si trova il DNA principale di un batterio?",
+"Che differenza c'è tra nucleo e nucleoide?",
+"Che funzione ha la parete cellulare?",
+"Che cosa sono i plasmidi?",
+"Qual è la funzione dei ribosomi?",
+"Che cosa sono i flagelli?",
+"Che differenza c'è tra Gram-positivi e Gram-negativi?",
+"Come si riproducono generalmente i batteri?",
+"Che cosa sono trasformazione, trasduzione e coniugazione?"
+]
+
+},
+
+
+"cellula eucariote":{
+
+title:"La cellula eucariote",
+
+definition:
+"La cellula eucariote possiede un nucleo delimitato da una membrana e numerosi organelli specializzati.",
+
+intro:
+"Le cellule eucariote costituiscono animali, piante, funghi e protisti.",
+
+sections:[
+
+{
+title:"1. Nucleo",
+text:
+"Il nucleo contiene la maggior parte del DNA cellulare ed è circondato dall'involucro nucleare."
+},
+
+{
+title:"2. Mitocondri",
+text:
+"I mitocondri sono coinvolti nella respirazione cellulare e nella produzione di ATP."
+},
+
+{
+title:"3. Reticolo endoplasmatico",
+text:
+"Il reticolo endoplasmatico rugoso presenta ribosomi e partecipa alla sintesi delle proteine. Quello liscio partecipa a funzioni come sintesi di lipidi e detossificazione."
+},
+
+{
+title:"4. Apparato di Golgi",
+text:
+"L'apparato di Golgi modifica, organizza e indirizza numerose molecole prodotte dalla cellula."
+},
+
+{
+title:"5. Lisosomi",
+text:
+"I lisosomi contengono enzimi coinvolti nella digestione intracellulare."
+},
+
+{
+title:"6. Cloroplasti",
+text:
+"Nelle cellule vegetali i cloroplasti sono sede della fotosintesi."
+}
+
+],
+
+keywords:[
+"nucleo",
+"mitocondri",
+"reticolo endoplasmatico",
+"Golgi",
+"lisosomi",
+"cloroplasti",
+"organelli"
+],
+
+questions:[
+"Che cos'è una cellula eucariote?",
+"Qual è la funzione del nucleo?",
+"Che cosa fanno i mitocondri?",
+"Qual è la differenza tra reticolo rugoso e liscio?",
+"Qual è la funzione del Golgi?",
+"Che cosa fanno i lisosomi?"
+]
+
+},
+
+
+"mitosi":{
+
+title:"Mitosi",
+
+definition:
+"La mitosi è un processo di divisione del nucleo cellulare che porta generalmente alla formazione di due nuclei geneticamente molto simili.",
+
+intro:
+"La mitosi è fondamentale per crescita, sviluppo, rinnovamento dei tessuti e alcune forme di riproduzione asessuata.",
+
+sections:[
+
+{
+title:"1. Interfase",
+text:
+"Prima della mitosi la cellula attraversa l'interfase. Durante la fase S viene replicato il DNA."
+},
+
+{
+title:"2. Profase",
+text:
+"I cromosomi si condensano e divengono visibili. Si organizza il fuso mitotico."
+},
+
+{
+title:"3. Metafase",
+text:
+"I cromosomi si dispongono nella regione centrale della cellula."
+},
+
+{
+title:"4. Anafase",
+text:
+"Le cromatidi sorelle vengono separate e si spostano verso poli opposti."
+},
+
+{
+title:"5. Telofase",
+text:
+"Si formano nuovamente i nuclei e i cromosomi iniziano a decondensarsi."
+},
+
+{
+title:"6. Citodieresi",
+text:
+"Il citoplasma viene diviso tra le due cellule figlie."
+}
+
+],
+
+keywords:[
+"interfase",
+"profase",
+"metafase",
+"anafase",
+"telofase",
+"citodieresi",
+"cromatidi"
+],
+
+questions:[
+"Che cos'è la mitosi?",
+"Perché il DNA viene replicato prima della mitosi?",
+"Che cosa accade in profase?",
+"Che cosa accade in metafase?",
+"Che cosa accade in anafase?",
+"Che cosa accade in telofase?"
+]
+
+},
+
+
+"meiosi":{
+
+title:"Meiosi",
+
+definition:
+"La meiosi è una particolare divisione cellulare che riduce il numero di cromosomi e contribuisce alla formazione delle cellule sessuali negli organismi che la utilizzano.",
+
+intro:
+"La meiosi è fondamentale per la riproduzione sessuata e contribuisce alla variabilità genetica.",
+
+sections:[
+
+{
+title:"1. Meiosi I",
+text:
+"Nella prima divisione meiotica vengono separati i cromosomi omologhi."
+},
+
+{
+title:"2. Profase I",
+text:
+"È una fase particolarmente importante perché può avvenire il crossing-over tra cromosomi omologhi."
+},
+
+{
+title:"3. Crossing-over",
+text:
+"Il crossing-over consiste nello scambio di segmenti di DNA tra cromosomi omologhi e contribuisce alla variabilità genetica."
+},
+
+{
+title:"4. Meiosi II",
+text:
+"Nella seconda divisione vengono separate le cromatidi sorelle."
+},
+
+{
+title:"5. Risultato",
+text:
+"Al termine della meiosi si ottengono generalmente cellule aploidi geneticamente differenti tra loro."
+}
+
+],
+
+keywords:[
+"meiosi",
+"gameti",
+"aploide",
+"diploide",
+"cromosomi omologhi",
+"crossing-over",
+"variabilità"
+],
+
+questions:[
+"Che cos'è la meiosi?",
+"Perché riduce il numero di cromosomi?",
+"Che cosa sono i cromosomi omologhi?",
+"Che cos'è il crossing-over?",
+"Qual è la differenza tra meiosi I e meiosi II?"
+]
+
+},
+
+
+"dna e rna":{
+
+title:"DNA e RNA",
+
+definition:
+"DNA e RNA sono acidi nucleici fondamentali per la conservazione e l'espressione dell'informazione genetica.",
+
+intro:
+"Il DNA contiene l'informazione genetica mentre diversi tipi di RNA svolgono ruoli fondamentali nell'espressione dei geni.",
+
+sections:[
+
+{
+title:"1. Nucleotidi",
+text:
+"Un nucleotide è formato da uno zucchero, un gruppo fosfato e una base azotata."
+},
+
+{
+title:"2. DNA",
+text:
+"Il DNA è generalmente formato da due filamenti complementari organizzati in una doppia elica."
+},
+
+{
+title:"3. Basi azotate",
+text:
+"Nel DNA sono presenti adenina, timina, citosina e guanina. L'adenina si appaia con la timina e la citosina con la guanina."
+},
+
+{
+title:"4. RNA",
+text:
+"L'RNA è generalmente costituito da un singolo filamento e contiene uracile invece della timina."
+},
+
+{
+title:"5. Trascrizione",
+text:
+"La trascrizione consiste nella produzione di RNA utilizzando una sequenza di DNA come stampo."
+},
+
+{
+title:"6. Traduzione",
+text:
+"La traduzione utilizza l'informazione contenuta nell'RNA messaggero per costruire una proteina."
+}
+
+],
+
+keywords:[
+"DNA",
+"RNA",
+"nucleotide",
+"adenina",
+"timina",
+"citosina",
+"guanina",
+"uracile",
+"trascrizione",
+"traduzione"
+],
+
+questions:[
+"Che cos'è il DNA?",
+"Che cos'è un nucleotide?",
+"Quali sono le basi azotate del DNA?",
+"Qual è la differenza tra DNA e RNA?",
+"Che cos'è la trascrizione?",
+"Che cos'è la traduzione?"
+]
+
+},
+
+
+"genetica":{
+
+title:"Genetica",
+
+definition:
+"La genetica studia i geni, l'ereditarietà e la variazione biologica.",
+
+intro:
+"Permette di comprendere come le caratteristiche biologiche vengono trasmesse e come possono comparire variazioni.",
+
+sections:[
+
+{
+title:"1. Gene",
+text:
+"Un gene è una regione del DNA associata a una determinata informazione biologica."
+},
+
+{
+title:"2. Alleli",
+text:
+"Gli alleli sono versioni alternative di uno stesso gene."
+},
+
+{
+title:"3. Genotipo",
+text:
+"Il genotipo rappresenta la costituzione genetica di un individuo."
+},
+
+{
+title:"4. Fenotipo",
+text:
+"Il fenotipo comprende le caratteristiche osservabili risultanti dall'interazione tra patrimonio genetico e ambiente."
+},
+
+{
+title:"5. Mutazioni",
+text:
+"Le mutazioni sono cambiamenti del materiale genetico. Possono avere effetti differenti a seconda del contesto."
+}
+
+],
+
+keywords:[
+"gene",
+"allele",
+"genotipo",
+"fenotipo",
+"mutazione",
+"ereditarietà"
+],
+
+questions:[
+"Che cos'è un gene?",
+"Che cosa sono gli alleli?",
+"Che cos'è il genotipo?",
+"Che cos'è il fenotipo?",
+"Che cos'è una mutazione?"
+]
+
+},
+
+
+"enzimi":{
+
+title:"Enzimi",
+
+definition:
+"Gli enzimi sono catalizzatori biologici che accelerano determinate reazioni chimiche abbassandone l'energia di attivazione.",
+
+intro:
+"La maggior parte degli enzimi è costituita da proteine, anche se esistono molecole di RNA con attività catalitica.",
+
+sections:[
+
+{
+title:"1. Catalizzatori",
+text:
+"Un catalizzatore aumenta la velocità di una reazione senza essere consumato definitivamente."
+},
+
+{
+title:"2. Substrato",
+text:
+"Il substrato è la molecola sulla quale agisce l'enzima."
+},
+
+{
+title:"3. Sito attivo",
+text:
+"Il sito attivo è la regione dell'enzima in cui avviene l'interazione con il substrato."
+},
+
+{
+title:"4. Temperatura",
+text:
+"La temperatura influenza la velocità delle reazioni. Temperature troppo elevate possono alterare la struttura di un enzima."
+},
+
+{
+title:"5. pH",
+text:
+"Ogni enzima presenta condizioni di pH in cui la sua attività può essere particolarmente efficace."
+}
+
+],
+
+keywords:[
+"enzima",
+"substrato",
+"sito attivo",
+"catalizzatore",
+"energia di attivazione",
+"pH",
+"temperatura"
+],
+
+questions:[
+"Che cos'è un enzima?",
+"Che cos'è un catalizzatore?",
+"Che cos'è il substrato?",
+"Che cos'è il sito attivo?",
+"Come influisce la temperatura?",
+"Come può influire il pH?"
+]
+
+}
+
+};
+
+
+/* =========================================================
+   ALIAS SCIENZE
+========================================================= */
+
+const scienceAliases={
+
+"procarioti":"cellula procariote",
+"procariota":"cellula procariote",
+"cellula procariota":"cellula procariote",
+"batteri":"cellula procariote",
+"batterio":"cellula procariote",
+
+"eucarioti":"cellula eucariote",
+"eucariota":"cellula eucariote",
+"cellula eucariotica":"cellula eucariote",
+
+"divisione cellulare":"mitosi",
+
+"mitosi e meiosi":"mitosi",
+
+"dna":"dna e rna",
+"rna":"dna e rna",
+
+"geni":"genetica",
+"ereditarieta":"genetica",
+
+"enzima":"enzimi",
+"proteine ed enzimi":"enzimi"
+
+};
+
+
+/* =========================================================
+   NORMALIZZAZIONE
+========================================================= */
+
+function normalizeText(text){
+
+    return String(text)
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .trim();
+
+}
+
+
+/* =========================================================
+   TROVA ARGOMENTO
+========================================================= */
+
+function findScienceTopic(text){
+
+    const normalized=normalizeText(text);
+
+    if(scienceAliases[normalized]){
+        return scienceAliases[normalized];
+    }
+
+    for(const key of Object.keys(scienceLibrary)){
+
+        const normalizedKey=normalizeText(key);
+
+        if(
+            normalized===normalizedKey ||
+            normalized.includes(normalizedKey) ||
+            normalizedKey.includes(normalized)
+        ){
+            return key;
+        }
+
+    }
+
+    return null;
+
+}
+
+
+/* =========================================================
+   GENERA LEZIONI
+========================================================= */
+
+function generateScienceLessons(){
+
+    const input=
+        document.getElementById("scienceTopics").value.trim();
+
+    if(!input){
+
+        alert(
+            "Scrivi almeno un argomento del professore."
+        );
+
+        return;
+
+    }
+
+    const topics=input
+        .split(/[\n,;]+/)
+        .map(x=>x.trim())
+        .filter(Boolean);
+
+    const lessons=[];
+    const unknown=[];
+
+    topics.forEach(topic=>{
+
+        const found=findScienceTopic(topic);
+
+        if(found){
+
+            if(!lessons.some(x=>x.title===scienceLibrary[found].title)){
+                lessons.push(scienceLibrary[found]);
+            }
+
+        }else{
+
+            unknown.push(topic);
+
+        }
+
+    });
+
+
+    let html="";
+
+
+    if(lessons.length){
+
+        html+=`
+
+        <div class="card lesson">
+
+            <h2>📖 Lezioni generate</h2>
+
+            <p>
+            Sono state trovate ${lessons.length} schede complete.
+            </p>
+
+        </div>
+
+        `;
+
+
+        lessons.forEach(lesson=>{
+
+            html+=`
+
+            <div class="card lesson">
+
+                <h2>🧬 ${escapeHTML(lesson.title)}</h2>
+
+                <div class="definition">
+
+                    <b>Definizione da ricordare</b>
+
+                    <p>
+                    ${escapeHTML(lesson.definition)}
+                    </p>
+
+                </div>
+
+
+                <div class="tip">
+
+                    <b>Per iniziare</b>
+
+                    <p>
+                    ${escapeHTML(lesson.intro)}
+                    </p>
+
+                </div>
+
+
+                <h3 style="margin-top:22px">
+                    📚 Spiegazione completa
+                </h3>
+
+
+                ${lesson.sections.map(section=>`
+
+                    <div class="lesson-section">
+
+                        <h3>
+                        ${escapeHTML(section.title)}
+                        </h3>
+
+                        <p>
+                        ${escapeHTML(section.text)}
+                        </p>
+
+                    </div>
+
+                `).join("")}
+
+
+                <div class="card" style="margin-top:18px">
+
+                    <h3>🔑 Parole chiave</h3>
+
+                    ${lesson.keywords.map(keyword=>`
+
+                        <span class="tag">
+                        ${escapeHTML(keyword)}
+                        </span>
+
+                    `).join("")}
+
+                </div>
+
+
+                <div class="card" style="margin-top:18px">
+
+                    <h3>🎓 Domande da interrogazione</h3>
+
+                    <ol>
+
+                    ${lesson.questions.map(question=>`
+
+                        <li>
+                        ${escapeHTML(question)}
+                        </li>
+
+                    `).join("")}
+
+                    </ol>
+
+                </div>
+
+
+                <div class="card" style="margin-top:18px">
+
+                    <h3>🧠 Metodo di studio</h3>
+
+                    <div class="step">
+
+                        <div class="step-number">1</div>
+
+                        <div>
+                        Leggi la definizione e assicurati di
+                        riuscire a spiegarla con parole tue.
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">2</div>
+
+                        <div>
+                        Studia ogni sezione cercando di capire
+                        il collegamento tra i concetti.
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">3</div>
+
+                        <div>
+                        Ripeti l'argomento senza guardare il testo.
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">4</div>
+
+                        <div>
+                        Rispondi alle domande da interrogazione.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+    }
+
+
+    if(unknown.length){
+
+        html+=`
+
+        <div class="card lesson">
+
+            <h2>🔎 Argomenti non ancora presenti</h2>
+
+            <p>
+            Questi argomenti non sono ancora presenti
+            nell'archivio offline dell'app:
+            </p>
+
+            ${unknown.map(topic=>`
+
+                <span class="tag">
+                ${escapeHTML(topic)}
+                </span>
+
+            `).join("")}
+
+
+            <div class="warning">
+
+                <b>Importante</b>
+
+                <p>
+                L'app non deve inventare una spiegazione quando
+                non conosce un argomento. Per questo motivo ti segnala
+                gli argomenti che devono essere aggiunti all'archivio.
+                </p>
+
+            </div>
+
+        </div>
+
+        `;
+
+    }
+
+
+    document.getElementById("scienceLessons").innerHTML=html;
+
+
+    document.getElementById("scienceLessons")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+}
+
+
+/* =========================================================
+   QUIZ DATABASE
+========================================================= */
+
+const quizzes={
+
+
+body:[
+
+{
+q:"Qual è il modo più corretto di interpretare un singolo gesto?",
+a:[
+"Come una prova certa dello stato mentale",
+"Come un indizio da valutare nel contesto",
+"Come una diagnosi psicologica",
+"Come una prova di menzogna"
+],
+c:1
+},
+
+{
+q:"Che cosa studia principalmente la prossemica?",
+a:[
+"Il ritmo cardiaco",
+"La distanza e l'uso dello spazio",
+"La grammatica",
+"La memoria"
+],
+c:1
+},
+
+{
+q:"Il contatto visivo...",
+a:[
+"Ha sempre lo stesso significato",
+"Dimostra sempre sicurezza",
+"Può avere funzioni diverse a seconda del contesto",
+"Dimostra sempre una bugia"
+],
+c:2
+},
+
+{
+q:"La comunicazione paralinguistica comprende...",
+a:[
+"Solo la grammatica",
+"Volume, ritmo, pause e intonazione",
+"Solo i gesti",
+"Solo la postura"
+],
+c:1
+},
+
+{
+q:"Perché è utile osservare un cluster di segnali?",
+a:[
+"Per evitare di basarsi su un singolo comportamento",
+"Per leggere la mente",
+"Per diagnosticare una persona",
+"Per conoscere automaticamente le intenzioni"
+],
+c:0
+},
+
+{
+q:"La postura può essere influenzata...",
+a:[
+"Solo dalla personalità",
+"Solo dalla paura",
+"Da contesto, abitudini e situazione",
+"Solo dalla cultura"
+],
+c:2
+},
+
+{
+q:"I gesti possono...",
+a:[
+"Accompagnare o enfatizzare le parole",
+"Dimostrare sempre una bugia",
+"Sostituire sempre il linguaggio verbale",
+"Avere sempre un significato universale"
+],
+c:0
+},
+
+{
+q:"Lo sguardo può contribuire...",
+a:[
+"Solo alla menzogna",
+"Alla regolazione dell'interazione sociale",
+"Solo alla paura",
+"Solo alla memoria"
+],
+c:1
+},
+
+{
+q:"Quale approccio è più prudente?",
+a:[
+"Ignorare il contesto",
+"Interpretare ogni gesto isolatamente",
+"Considerare più informazioni insieme",
+"Dare per certa la prima interpretazione"
+],
+c:2
+},
+
+{
+q:"La distanza personale può variare in base...",
+a:[
+"Alla cultura e alla relazione",
+"Solo all'età",
+"Solo al peso",
+"Solo ai vestiti"
+],
+c:0
+},
+
+{
+q:"Un cambiamento improvviso nel comportamento...",
+a:[
+"Dimostra automaticamente una bugia",
+"È sempre irrilevante",
+"Può essere un elemento da approfondire",
+"Dimostra sempre paura"
+],
+c:2
+},
+
+{
+q:"La postura riguarda principalmente...",
+a:[
+"La posizione e l'orientamento del corpo",
+"Solo il volto",
+"Solo la voce",
+"Solo le mani"
+],
+c:0
+},
+
+{
+q:"Le espressioni facciali coinvolgono...",
+a:[
+"Soltanto le mani",
+"Movimenti e configurazioni del volto",
+"Solo la postura",
+"Solo la voce"
+],
+c:1
+},
+
+{
+q:"Il significato di un comportamento non verbale...",
+a:[
+"È sempre universale",
+"Dipende anche dal contesto",
+"È sempre identico",
+"Non cambia mai"
+],
+c:1
+},
+
+{
+q:"Se una persona evita lo sguardo...",
+a:[
+"Significa certamente che mente",
+"Può avere molte spiegazioni",
+"Significa sempre timidezza",
+"Significa sempre disinteresse"
+],
+c:1
+},
+
+{
+q:"Per capire un comportamento è utile conoscere...",
+a:[
+"Il comportamento abituale della persona",
+"Solo il gesto osservato",
+"Solo l'età",
+"Solo il tono della voce"
+],
+c:0
+},
+
+{
+q:"Un gesto può avere significati diversi...",
+a:[
+"Mai",
+"Solo nei film",
+"A seconda del contesto",
+"Solo negli adulti"
+],
+c:2
+},
+
+{
+q:"Il linguaggio del corpo può...",
+a:[
+"Integrare la comunicazione verbale",
+"Sostituire sempre le parole",
+"Leggere i pensieri",
+"Prevedere sempre le intenzioni"
+],
+c:0
+},
+
+{
+q:"Una conclusione prudente dovrebbe distinguere...",
+a:[
+"Fatti osservati e interpretazioni",
+"Solo emozioni",
+"Solo gesti",
+"Solo parole"
+],
+c:0
+},
+
+{
+q:"Qual è una buona regola generale?",
+a:[
+"Un gesto = un significato certo",
+"Il contesto non conta",
+"Osservare più segnali e mantenere cautela",
+"La prima impressione è sempre corretta"
+],
+c:2
+}
+
+],
+
+
+finance:[
+
+{
+q:"Che cos'è un'azione?",
+a:[
+"Una quota di proprietà di una società",
+"Un prestito obbligazionario",
+"Un conto corrente",
+"Una valuta"
+],
+c:0
+},
+
+{
+q:"Che cos'è un'obbligazione?",
+a:[
+"Una quota di un'azienda",
+"Uno strumento di debito",
+"Un indice azionario",
+"Una criptovaluta"
+],
+c:1
+},
+
+{
+q:"Che cos'è generalmente un ETF?",
+a:[
+"Un fondo quotato",
+"Un conto bancario",
+"Un'obbligazione individuale",
+"Un'assicurazione"
+],
+c:0
+},
+
+{
+q:"La diversificazione serve principalmente a...",
+a:[
+"Garantire un profitto",
+"Ridurre la concentrazione dell'esposizione",
+"Eliminare ogni rischio",
+"Prevedere il mercato"
+],
+c:1
+},
+
+{
+q:"La volatilità misura...",
+a:[
+"La variazione dei prezzi nel tempo",
+"Il numero di azionisti",
+"Il fatturato",
+"La quantità di dipendenti"
+],
+c:0
+},
+
+{
+q:"Prima di analizzare un'azienda è utile capire...",
+a:[
+"Solo il prezzo",
+"Il modello di business",
+"Solo il logo",
+"Solo il numero di dipendenti"
+],
+c:1
+},
+
+{
+q:"Il fatturato indica principalmente...",
+a:[
+"I ricavi generati",
+"Il debito totale",
+"Il patrimonio personale",
+"La volatilità"
+],
+c:0
+},
+
+{
+q:"L'utile rappresenta...",
+a:[
+"Una misura del risultato economico dopo i costi",
+"Il prezzo dell'azione",
+"Il numero di azioni",
+"Il capitale investito"
+],
+c:0
+},
+
+{
+q:"Il debito di un'azienda è...",
+a:[
+"Sempre positivo",
+"Sempre negativo",
+"Una componente finanziaria da analizzare nel contesto",
+"I ricavi"
+],
+c:2
+},
+
+{
+q:"Un rischio di liquidità riguarda...",
+a:[
+"La difficoltà di comprare o vendere senza effetti rilevanti sul prezzo",
+"Il colore del titolo",
+"Il numero di dipendenti",
+"La tassazione sul reddito"
+],
+c:0
+},
+
+{
+q:"Un'analisi finanziaria dovrebbe utilizzare...",
+a:[
+"Una sola fonte",
+"Fonti verificabili e appropriate",
+"Solo social network",
+"Solo opinioni"
+],
+c:1
+},
+
+{
+q:"Uno scenario negativo serve a...",
+a:[
+"Garantire una perdita",
+"Analizzare cosa potrebbe andare storto",
+"Prevedere il futuro con certezza",
+"Eliminare il rischio"
+],
+c:1
+},
+
+{
+q:"Il rapporto rischio-rendimento indica che...",
+a:[
+"Più rischio garantisce profitto",
+"Rischio e rendimento devono essere considerati insieme",
+"Non esiste rischio",
+"Il rendimento è sempre certo"
+],
+c:1
+},
+
+{
+q:"Un orizzonte temporale indica...",
+a:[
+"Per quanto tempo si considera il progetto",
+"Il numero di azioni",
+"Il valore nominale",
+"Il numero di broker"
+],
+c:0
+},
+
+{
+q:"Un bilancio serve a...",
+a:[
+"Fornire informazioni sulla situazione economica e finanziaria dell'azienda",
+"Prevedere sempre il prezzo",
+"Garantire il rendimento",
+"Eliminare il rischio"
+],
+c:0
+},
+
+{
+q:"Il cash flow riguarda...",
+a:[
+"I flussi di cassa",
+"Solo gli utili",
+"Solo il prezzo",
+"Solo i dividendi"
+],
+c:0
+},
+
+{
+q:"Un indice di borsa...",
+a:[
+"Può rappresentare un insieme di titoli secondo determinate regole",
+"È sempre un singolo titolo",
+"È sempre un'obbligazione",
+"È un conto corrente"
+],
+c:0
+},
+
+{
+q:"La capitalizzazione di mercato dipende principalmente da...",
+a:[
+"Prezzo dell'azione e numero di azioni",
+"Solo dal fatturato",
+"Solo dai dipendenti",
+"Solo dal debito"
+],
+c:0
+},
+
+{
+q:"Una buona analisi dovrebbe includere...",
+a:[
+"Solo lo scenario positivo",
+"Rischi, ipotesi e scenari",
+"Solo il prezzo",
+"Solo le opinioni online"
+],
+c:1
+},
+
+{
+q:"Qual è un principio importante per chi studia finanza?",
+a:[
+"Il rendimento futuro è garantito",
+"Nessun investimento è privo di rischio",
+"Il prezzo sale sempre",
+"La diversificazione elimina ogni perdita"
+],
+c:1
+}
+
+],
+
+
+science:[
+
+{
+q:"Qual è una caratteristica fondamentale delle cellule procariote?",
+a:[
+"Possiedono un nucleo delimitato da membrana",
+"Non possiedono un vero nucleo",
+"Possiedono sempre mitocondri",
+"Possiedono sempre cloroplasti"
+],
+c:1
+},
+
+{
+q:"Dove si trova il principale cromosoma batterico?",
+a:[
+"Nel nucleo",
+"Nel nucleoide",
+"Nei mitocondri",
+"Nel reticolo endoplasmatico"
+],
+c:1
+},
+
+{
+q:"I procarioti comprendono principalmente...",
+a:[
+"Batteri e archei",
+"Piante e funghi",
+"Animali e piante",
+"Solo virus"
+],
+c:0
+},
+
+{
+q:"I plasmidi sono...",
+a:[
+"Organelli",
+"Piccole molecole di DNA extracromosomico",
+"Proteine",
+"Zuccheri"
+],
+c:1
+},
+
+{
+q:"Qual è una funzione della membrana plasmatica?",
+a:[
+"Controllare gli scambi con l'ambiente",
+"Produrre DNA",
+"Creare il nucleo",
+"Distruggere i ribosomi"
+],
+c:0
+},
+
+{
+q:"La parete dei batteri contiene tipicamente...",
+a:[
+"Peptidoglicano",
+"Cellulosa sempre",
+"Chitina sempre",
+"DNA"
+],
+c:0
+},
+
+{
+q:"I ribosomi partecipano...",
+a:[
+"Alla sintesi delle proteine",
+"Alla replicazione del DNA soltanto",
+"Alla produzione di luce",
+"Alla digestione"
+],
+c:0
+},
+
+{
+q:"Alcuni batteri utilizzano i flagelli per...",
+a:[
+"Muoversi",
+"Produrre DNA",
+"Creare il nucleo",
+"Formare cromosomi eucariotici"
+],
+c:0
+},
+
+{
+q:"La capsula batterica può contribuire...",
+a:[
+"Alla protezione e adesione",
+"Alla formazione del nucleo",
+"Alla sintesi dei cromosomi",
+"Alla meiosi"
+],
+c:0
+},
+
+{
+q:"Il DNA è...",
+a:[
+"Una molecola che contiene informazione genetica",
+"Una proteina",
+"Uno zucchero",
+"Un organello"
+],
+c:0
+},
+
+{
+q:"Il metabolismo comprende...",
+a:[
+"L'insieme delle reazioni chimiche cellulari",
+"Solo la respirazione",
+"Solo la digestione",
+"Solo la mitosi"
+],
+c:0
+},
+
+{
+q:"Gli enzimi sono generalmente...",
+a:[
+"Catalizzatori biologici",
+"Zuccheri",
+"Acidi nucleici sempre",
+"Membrane"
+],
+c:0
+},
+
+{
+q:"La mitosi produce generalmente...",
+a:[
+"Due cellule figlie geneticamente molto simili alla cellula madre",
+"Quattro gameti",
+"Solo cellule procariote",
+"DNA libero"
+],
+c:0
+},
+
+{
+q:"La meiosi è importante soprattutto per...",
+a:[
+"La formazione di cellule sessuali negli organismi che la utilizzano",
+"La produzione di batteri",
+"La formazione della parete batterica",
+"La respirazione"
+],
+c:0
+},
+
+{
+q:"Le cellule eucariote possiedono...",
+a:[
+"Un nucleo delimitato da membrana",
+"Una parete batterica",
+"Solo DNA circolare",
+"Nessun organello"
+],
+c:0
+},
+
+{
+q:"Quale struttura è tipicamente presente nei batteri?",
+a:[
+"Nucleoide",
+"Nucleo con membrana",
+"Mitocondrio",
+"Apparato di Golgi"
+],
+c:0
+},
+
+{
+q:"La genetica studia...",
+a:[
+"Ereditarietà e variazione biologica",
+"Solo la respirazione",
+"Solo le rocce",
+"Solo la pressione"
+],
+c:0
+},
+
+{
+q:"Una mutazione è...",
+a:[
+"Un cambiamento nella sequenza del materiale genetico",
+"Una forma di energia",
+"Un organello",
+"Una proteina"
+],
+c:0
+},
+
+{
+q:"La respirazione cellulare è collegata...",
+a:[
+"Alla produzione di energia utilizzabile dalla cellula",
+"Solo alla divisione cellulare",
+"Solo alla replicazione del DNA",
+"Alla formazione dei ribosomi"
+],
+c:0
+},
+
+{
+q:"Una differenza fondamentale tra procarioti ed eucarioti è...",
+a:[
+"La presenza di un nucleo delimitato da membrana negli eucarioti",
+"L'assenza totale di DNA nei procarioti",
+"L'assenza di ribosomi negli eucarioti",
+"L'assenza di membrana nei procarioti"
+],
+c:0
+}
+
+]
+
+};
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+function loadQuiz(){
+
+    const type=
+        document.getElementById("quizType").value;
+
+    const questions=quizzes[type];
+
+    const container=
+        document.getElementById("quizContainer");
+
+    document.getElementById("quizResult").innerHTML="";
+
+    container.innerHTML=questions.map((question,index)=>{
+
+        return `
+
+        <div class="quiz-question">
+
+            <div class="quiz-question-title">
+
+                ${index+1}.
+                ${escapeHTML(question.q)}
+
+            </div>
+
+
+            ${question.a.map((answer,i)=>`
+
+                <label class="quiz-option">
+
+                    <input
+                    type="radio"
+                    name="quizQuestion${index}"
+                    value="${i}">
+
+                    ${String.fromCharCode(65+i)}.
+                    ${escapeHTML(answer)}
+
+                </label>
+
+            `).join("")}
+
+        </div>
+
+        `;
+
+    }).join("");
+
+}
+
+
+function correctQuiz(){
+
+    const type=
+        document.getElementById("quizType").value;
+
+    const questions=quizzes[type];
+
+    let score=0;
+
+    let answered=0;
+
+
+    questions.forEach((question,index)=>{
+
+        const selected=
+            document.querySelector(
+                `input[name="quizQuestion${index}"]:checked`
+            );
+
+        const inputs=
+            document.querySelectorAll(
+                `input[name="quizQuestion${index}"]`
+            );
+
+
+        if(selected){
+
+            answered++;
+
+            const selectedValue=
+                Number(selected.value);
+
+            if(selectedValue===question.c){
+                score++;
+            }
+
+
+            inputs.forEach(input=>{
+
+                const label=
+                    input.closest(".quiz-option");
+
+                if(Number(input.value)===question.c){
+                    label.classList.add("correct");
+                }
+
+                if(
+                    input.checked &&
+                    Number(input.value)!==question.c
+                ){
+                    label.classList.add("wrong");
+                }
+
+            });
+
+        }
+
+    });
+
+
+    const percentage=
+        Math.round(
+            score/questions.length*100
+        );
+
+
+    document.getElementById("quizResult").innerHTML=`
+
+        <div class="card">
+
+            <h3>📊 Risultato</h3>
+
+            <p>
+            Hai ottenuto
+            <b>${score}/${questions.length}</b>
+            (${percentage}%).
+            </p>
+
+            <p>
+            Hai risposto a ${answered} domande.
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   IDEE
+========================================================= */
+
+function saveIdea(){
+
+    const title=
+        document.getElementById("ideaTitle").value.trim();
+
+    const description=
+        document.getElementById("ideaDescription").value.trim();
+
+    const category=
+        document.getElementById("ideaCategory").value;
+
+
+    if(!title || !description){
+
+        alert(
+            "Inserisci almeno titolo e descrizione."
+        );
+
+        return;
+
+    }
+
+
+    const ideas=
+        getData("ideas",[]);
+
+
+    ideas.unshift({
+
+        title:title,
+
+        description:description,
+
+        category:category,
+
+        date:new Date().toLocaleString("it-IT")
+
+    });
+
+
+    setData("ideas",ideas);
+
+
+    document.getElementById("ideaTitle").value="";
+    document.getElementById("ideaDescription").value="";
+
+
+    renderIdeas();
+
+}
+
+
+function deleteIdea(index){
+
+    const ideas=
+        getData("ideas",[]);
+
+    ideas.splice(index,1);
+
+    setData("ideas",ideas);
+
+    renderIdeas();
+
+}
+
+
+/* =========================================================
+   PROJECT
+========================================================= */
+
+function saveProject(){
+
+    const name=
+        document.getElementById("projectName").value.trim();
+
+
+    if(!name){
+
+        alert(
+            "Inserisci il nome del progetto."
+        );
+
+        return;
+
+    }
+
+
+    const project={
+
+        name:name,
+
+        goal:
+            document.getElementById("projectGoal").value,
+
+        hypothesis:
+            document.getElementById("projectHypothesis").value,
+
+        sources:
+            document.getElementById("projectSources").value,
+
+        strategy:
+            document.getElementById("projectStrategy").value,
+
+        risks:
+            document.getElementById("projectRisks").value,
+
+        positive:
+            document.getElementById("projectPositive").value,
+
+        base:
+            document.getElementById("projectBase").value,
+
+        negative:
+            document.getElementById("projectNegative").value,
+
+        next:
+            document.getElementById("projectNext").value,
+
+        date:
+            new Date().toLocaleString("it-IT")
+
+    };
+
+
+    const projects=
+        getData("projects",[]);
+
+
+    projects.unshift(project);
+
+
+    setData("projects",projects);
+
+
+    [
+        "projectName",
+        "projectGoal",
+        "projectHypothesis",
+        "projectSources",
+        "projectStrategy",
+        "projectRisks",
+        "projectPositive",
+        "projectBase",
+        "projectNegative",
+        "projectNext"
+    ].forEach(id=>{
+        document.getElementById(id).value="";
+    });
+
+
+    renderProjects();
+
+}
+
+
+function deleteProject(index){
+
+    const projects=
+        getData("projects",[]);
+
+    projects.splice(index,1);
+
+    setData("projects",projects);
+
+    renderProjects();
+
+}
+
+
+/* =========================================================
+   RENDER IDEE
+========================================================= */
+
+function renderIdeas(){
+
+    const container=
+        document.getElementById("ideasList");
+
+    const ideas=
+        getData("ideas",[]);
+
+
+    if(!ideas.length){
+
+        container.innerHTML=`
+
+        <div class="card">
+
+            <p>
+            Non hai ancora salvato nessuna idea.
+            </p>
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML=ideas.map((idea,index)=>`
+
+        <div class="card">
+
+            <span class="tag">
+            ${escapeHTML(idea.category)}
+            </span>
+
+            <h3>
+            ${escapeHTML(idea.title)}
+            </h3>
+
+            <p>
+            ${escapeHTML(idea.description)}
+            </p>
+
+            <small>
+            ${escapeHTML(idea.date)}
+            </small>
+
+            <br><br>
+
+            <button
+            class="btn danger"
+            onclick="deleteIdea(${index})">
+
+            Elimina
+
+            </button>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   RENDER PROJECTS
+========================================================= */
+
+function renderProjects(){
+
+    const container=
+        document.getElementById("projectsList");
+
+    const projects=
+        getData("projects",[]);
+
+
+    if(!projects.length){
+
+        container.innerHTML=`
+
+        <div class="card">
+
+            <p>
+            Non hai ancora salvato nessun progetto.
+            </p>
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML=projects.map((project,index)=>`
+
+        <div class="card">
+
+            <span class="tag">
+            PROGETTO
+            </span>
+
+            <h3>
+            ${escapeHTML(project.name)}
+            </h3>
+
+            <p>
+            <b>Obiettivo:</b>
+            ${escapeHTML(project.goal)}
+            </p>
+
+            <p>
+            <b>Ipotesi:</b>
+            ${escapeHTML(project.hypothesis)}
+            </p>
+
+            <p>
+            <b>Strategia:</b>
+            ${escapeHTML(project.strategy)}
+            </p>
+
+            <p>
+            <b>Rischi:</b>
+            ${escapeHTML(project.risks)}
+            </p>
+
+            <p>
+            <b>Prossimi passi:</b>
+            ${escapeHTML(project.next)}
+            </p>
+
+            <small>
+            ${escapeHTML(project.date)}
+            </small>
+
+            <br><br>
+
+            <button
+            class="btn danger"
+            onclick="deleteProject(${index})">
+
+            Elimina
+
+            </button>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   RENDER DASHBOARD
+========================================================= */
+
+function renderDashboard(){
+
+    const ideas=
+        getData("ideas",[]);
+
+    const projects=
+        getData("projects",[]);
+
+
+    document.getElementById("dashboardStats").innerHTML=`
+
+        <div class="grid2">
+
+            <div>
+
+                <div style="font-size:30px;font-weight:800">
+                ${ideas.length}
+                </div>
+
+                <p>
+                Idee salvate
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <div style="font-size:30px;font-weight:800">
+                ${projects.length}
+                </div>
+
+                <p>
+                Progetti salvati
+                </p>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RENDER GENERALE
+========================================================= */
+
+function renderAll(){
+
+    renderIdeas();
+
+    renderProjects();
+
+    renderDashboard();
+
+
+    const topics=
+        getData("scienceTopics","");
+
+    const scienceInput=
+        document.getElementById("scienceTopics");
+
+    if(
+        scienceInput &&
+        document.activeElement!==scienceInput
+    ){
+
+        scienceInput.value=topics;
+
+    }
+
+
+    const finance=
+        getData("financeData",{});
+
+
+    const financeGoal=
+        document.getElementById("financeGoal");
+
+
+    if(financeGoal){
+
+        financeGoal.value=
+            finance.goal || "";
+
+        document.getElementById("financeHorizon").value=
+            finance.horizon || "Breve termine";
+
+        document.getElementById("financeRisk").value=
+            finance.risk || "";
+
+        document.getElementById("financeSources").value=
+            finance.sources || "";
+
+    }
+
+}
+
+
+/* =========================================================
+   AVVIO
+========================================================= */
+
+renderAll();
+
+loadQuiz();
+
 </script>
-</body></html>
+
+</body>
+</html>

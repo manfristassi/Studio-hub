@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Studio Hub — Il tuo spazio personale</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#697386;--accent:#5b5bd6;--accent2:#7c3aed;--line:#e7eaf1;--ok:#0f9d70}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
+.app{display:flex;min-height:100vh}.side{width:245px;background:#11152a;color:#fff;padding:22px 16px;position:fixed;height:100vh}
+.logo{font-size:20px;font-weight:800;padding:8px 10px 25px}.logo span{color:#9b8cff}
+nav button{width:100%;border:0;background:transparent;color:#cbd0e0;text-align:left;padding:12px 13px;border-radius:10px;margin:3px 0;cursor:pointer;font-size:14px}
+nav button.active,nav button:hover{background:#272d4d;color:#fff}.main{margin-left:245px;width:calc(100% - 245px);padding:30px;max-width:1400px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.title h1{margin:0 0 5px;font-size:30px}.title p{margin:0;color:var(--muted)}
+.btn{border:0;border-radius:10px;padding:10px 14px;background:var(--accent);color:white;cursor:pointer;font-weight:700}.btn.secondary{background:#eef0ff;color:#4848ae}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 4px 18px #17203308}.card h3{margin:0 0 8px}.card p{color:var(--muted);line-height:1.5}.big{font-size:30px;font-weight:800}.tag{display:inline-block;background:#f0efff;color:#4c43bd;padding:5px 9px;border-radius:999px;font-size:12px;margin:4px 4px 0 0}
+.section{display:none}.section.active{display:block}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+input,textarea,select{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;font:inherit;background:white}textarea{min-height:140px;resize:vertical}.row{display:flex;gap:10px}.row>*{flex:1}
+.item{padding:14px;border:1px solid var(--line);border-radius:12px;margin-top:10px}.item strong{display:block;margin-bottom:5px}.muted{color:var(--muted);font-size:13px}.progress{height:8px;background:#eceef5;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:45%}
+table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
+@media(max-width:800px){.side{width:100%;height:auto;position:relative}.app{display:block}.main{margin-left:0;width:100%;padding:18px}.side nav{display:flex;overflow:auto}.side nav button{white-space:nowrap}.grid,.grid2{grid-template-columns:1fr}.logo{padding-bottom:12px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+<div class="logo">Studio <span>Hub</span></div>
+<nav>
+<button class="active" onclick="show('home',this)">🏠 Dashboard</button>
+<button onclick="show('body',this)">🧠 Linguaggio del corpo</button>
+<button onclick="show('finance',this)">📈 Finanza & Borsa</button>
+<button onclick="show('science',this)">🔬 Scienze</button>
+<button onclick="show('ideas',this)">💡 Le mie idee</button>
+<button onclick="show('planner',this)">📊 Project Planner</button>
+</nav>
+</aside>
+<main class="main">
+<section id="home" class="section active">
+<header><div class="title"><h1>Il tuo spazio personale</h1><p>Studia, organizza idee e costruisci progetti.</p></div></header>
+<div class="grid">
+<div class="card"><span class="tag">Studio</span><h3>Linguaggio del corpo</h3><p>Concetti, esempi e quiz sulla comunicazione non verbale.</p><button class="btn" onclick="go('body')">Apri</button></div>
+<div class="card"><span class="tag">Finanza</span><h3>Finanza & Borsa</h3><p>Impara i fondamentali e costruisci piani in modo ordinato.</p><button class="btn" onclick="go('finance')">Apri</button></div>
+<div class="card"><span class="tag">Scuola</span><h3>Scienze — 4° anno</h3><p>Area modulare per biologia, chimica, fisica e scienze della Terra.</p><button class="btn" onclick="go('science')">Apri</button></div>
+</div>
+<div class="grid2" style="margin-top:16px">
+<div class="card"><h3>💡 Ultime idee</h3><div id="homeIdeas" class="muted">Nessuna idea salvata.</div></div>
+<div class="card"><h3>📊 Progetto finanziario</h3><p>Trasforma un'idea in un progetto con obiettivi, regole, rischi e scenari.</p><button class="btn secondary" onclick="go('planner')">Apri planner</button></div>
+</div>
+</section>
+
+<section id="body" class="section">
+<header><div class="title"><h1>🧠 Linguaggio del corpo</h1><p>Studia i segnali non verbali senza trattarli come "lettura della mente".</p></div></header>
+<div class="cards">
+<div class="card"><h3>Postura</h3><p>Posizione del corpo, orientamento e cambiamenti possono fornire indizi sullo stato della persona, ma vanno interpretati nel contesto.</p></div>
+<div class="card"><h3>Espressioni</h3><p>Movimenti del viso e variazioni espressive possono accompagnare emozioni e comunicazione.</p></div>
+<div class="card"><h3>Gesti</h3><p>Mani, braccia e movimenti possono enfatizzare, sostituire o accompagnare le parole.</p></div>
+<div class="card"><h3>Spazio personale</h3><p>La distanza comunicativa varia con cultura, relazione, ambiente e situazione.</p></div>
+<div class="card"><h3>Contatto visivo</h3><p>Lo sguardo può avere funzioni sociali diverse; evitare il contatto visivo non ha un significato unico.</p></div>
+<div class="card"><h3>Regola d'oro</h3><p><b>Un singolo segnale non basta.</b> Considera più segnali, il contesto e ciò che la persona dice.</p></div>
+</div>
+</section>
+
+<section id="finance" class="section">
+<header><div class="title"><h1>📈 Finanza & Borsa</h1><p>Area didattica per imparare concetti finanziari e organizzare le tue analisi.</p></div></header>
+<div class="cards">
+<div class="card"><h3>Azioni</h3><p>Quote di proprietà di una società. Studia prezzo, capitalizzazione, utili, dividendi e volatilità.</p></div>
+<div class="card"><h3>Obbligazioni</h3><p>Strumenti di debito con caratteristiche di durata, cedola, rendimento e rischio di credito.</p></div>
+<div class="card"><h3>ETF</h3><p>Fondi quotati che possono seguire un indice o una strategia. Valuta costi, indice, replica e rischi.</p></div>
+<div class="card"><h3>Gestione del rischio</h3><p>Diversificazione, dimensionamento della posizione, orizzonte temporale e perdita massima accettabile.</p></div>
+</div>
+<div class="card" style="margin-top:16px"><h3>Checklist di analisi</h3>
+<div class="row"><label>Obiettivo<input id="fGoal" placeholder="Es. studiare un ETF"></label><label>Orizzonte<select id="fTime"><option>Breve</option><option>Medio</option><option>Lungo</option></select></label></div>
+<div class="row" style="margin-top:10px"><label>Rischi principali<input id="fRisk" placeholder="Elenca i rischi"></label><label>Fonti da controllare<input id="fSources" placeholder="Bilanci, documenti, dati..."></label></div>
+<button class="btn" style="margin-top:12px" onclick="saveFinance()">Salva checklist</button>
+<div id="financeSaved"></div></div>
+</section>
+
+<section id="science" class="section">
+<header><div class="title"><h1>🔬 Scienze — 4° anno</h1><p>Struttura modulare: possiamo adattarla al tuo liceo e al tuo programma reale.</p></div></header>
+<div class="cards">
+<div class="card"><h3>🧬 Biologia</h3><p>Cellula, metabolismo, genetica, DNA/RNA, divisione cellulare, evoluzione e fisiologia.</p><div class="progress"><i style="width:20%"></i></div></div>
+<div class="card"><h3>⚗️ Chimica</h3><p>Struttura atomica, legami, reazioni, equilibrio, acidi e basi, organica.</p><div class="progress"><i style="width:20%"></i></div></div>
+<div class="card"><h3>⚡ Fisica</h3><p>Meccanica, energia, quantità di moto, termodinamica ed eventuali moduli previsti dal tuo indirizzo.</p><div class="progress"><i style="width:20%"></i></div></div>
+<div class="card"><h3>🌍 Scienze della Terra</h3><p>Struttura della Terra, dinamica interna, rocce, tettonica e atmosfera, secondo il programma.</p><div class="progress"><i style="width:20%"></i></div></div>
+</div>
+<div class="card" style="margin-top:16px"><h3>Personalizza il programma</h3><p>Scrivi qui gli argomenti che hai realmente svolto a scuola: li useremo per costruire la versione completa.</p><textarea id="scienceNotes" placeholder="Es. genetica, redox, termodinamica..."></textarea><button class="btn" onclick="saveScience()">Salva argomenti</button><div id="scienceSaved"></div></div>
+</section>
+
+<section id="ideas" class="section">
+<header><div class="title"><h1>💡 Le mie idee</h1><p>Scrivi liberamente. L'app salva le idee nel browser.</p></div></header>
+<div class="card"><div class="row"><input id="ideaTitle" placeholder="Titolo dell'idea"><select id="ideaCat"><option>Studio</option><option>Finanza</option><option>Business</option><option>Personale</option><option>Altro</option></select></div>
+<textarea id="ideaText" style="margin-top:10px" placeholder="Descrivi la tua idea..."></textarea><button class="btn" style="margin-top:10px" onclick="addIdea()">+ Salva idea</button></div>
+<div id="ideasList" style="margin-top:16px"></div>
+</section>
+
+<section id="planner" class="section">
+<header><div class="title"><h1>📊 Project Planner</h1><p>Costruisci un piano finanziario didattico e ordinato. Non è consulenza finanziaria.</p></div></header>
+<div class="card">
+<div class="row"><label>Nome progetto<input id="pName" placeholder="Es. Piano di studio ETF"></label><label>Obiettivo<input id="pGoal" placeholder="Cosa vuoi ottenere/imparare?"></label></div>
+<div class="row" style="margin-top:10px"><label>Capitale ipotetico (€)<input id="pCapital" type="number" placeholder="1000"></label><label>Orizzonte<select id="pHorizon"><option>1-3 anni</option><option>3-5 anni</option><option>5+ anni</option></select></label></div>
+<label style="display:block;margin-top:10px">Strategia / regole<textarea id="pStrategy" placeholder="Quali regole seguirai?"></textarea></label>
+<label style="display:block;margin-top:10px">Rischi e scenario negativo<textarea id="pRisks" placeholder="Cosa potrebbe andare storto?"></textarea></label>
+<label style="display:block;margin-top:10px">Fonti e verifiche<textarea id="pSources" placeholder="Documenti, dati, fonti da controllare..."></textarea></label>
+<button class="btn" style="margin-top:10px" onclick="savePlan()">Salva progetto</button>
+</div>
+<div id="plansList" style="margin-top:16px"></div>
+</section>
+</main></div>
+<script>
+const get=(k,d=[])=>JSON.parse(localStorage.getItem(k)||JSON.stringify(d));
+const set=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+function show(id,btn){document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');render();}
+function go(id){show(id,[...document.querySelectorAll('nav button')].find(b=>b.getAttribute('onclick')?.includes("'"+id+"'")))}
+function addIdea(){let t=ideaTitle.value.trim(),x=ideaText.value.trim();if(!t||!x)return alert('Inserisci titolo e descrizione.');let a=get('ideas');a.unshift({t,x,c:ideaCat.value,d:new Date().toLocaleString('it-IT')});set('ideas',a);ideaTitle.value='';ideaText.value='';render();}
+function delIdea(i){let a=get('ideas');a.splice(i,1);set('ideas',a);render();}
+function savePlan(){let p={n:pName.value,g:pGoal.value,c:pCapital.value,h:pHorizon.value,s:pStrategy.value,r:pRisks.value,src:pSources.value,d:new Date().toLocaleString('it-IT')};if(!p.n)return alert('Dai un nome al progetto.');let a=get('plans');a.unshift(p);set('plans',a);['pName','pGoal','pCapital','pStrategy','pRisks','pSources'].forEach(id=>document.getElementById(id).value='');render();}
+function delPlan(i){let a=get('plans');a.splice(i,1);set('plans',a);render();}
+function saveScience(){set('scienceNotes',scienceNotes.value);scienceSaved.innerHTML='<p class="muted">Salvato.</p>'}
+function saveFinance(){set('financeChecklist',{g:fGoal.value,t:fTime.value,r:fRisk.value,s:fSources.value});financeSaved.innerHTML='<p class="muted">Checklist salvata.</p>'}
+function render(){let a=get('ideas');ideasList.innerHTML=a.length?a.map((v,i)=>`<div class="card item"><span class="tag">${v.c}</span><strong>${esc(v.t)}</strong><p>${esc(v.x)}</p><span class="muted">${v.d}</span> <button class="btn secondary" onclick="delIdea(${i})">Elimina</button></div>`).join(''):'<div class="card muted">Nessuna idea salvata.</div>';homeIdeas.innerHTML=a.length?`<b>${esc(a[0].t)}</b><br><span class="muted">${esc(a[0].x).slice(0,100)}...</span>`:'Nessuna idea salvata.';
+let p=get('plans');plansList.innerHTML=p.length?p.map((v,i)=>`<div class="card item"><span class="tag">${v.h}</span><strong>${esc(v.n)}</strong><p><b>Obiettivo:</b> ${esc(v.g)}<br><b>Capitale ipotetico:</b> €${esc(v.c||'0')}</p><p>${esc(v.s)}</p><span class="muted">${v.d}</span> <button class="btn secondary" onclick="delPlan(${i})">Elimina</button></div>`).join(''):'<div class="card muted">Nessun progetto salvato.</div>';
+scienceNotes.value=localStorage.getItem('scienceNotes')||'';let fc=get('financeChecklist',{});fGoal.value=fc.g||'';fTime.value=fc.t||'Breve';fRisk.value=fc.r||'';fSources.value=fc.s||'';}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+render();
+</script>
+</body></html>
